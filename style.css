@@ -1,37 +1,107 @@
-body{
-    margin:0;
-    font-family:Arial,sans-serif;
-    background:pink;
+body {
+    margin: 0;
+    /* Современный системный шрифт, который выглядит дорого на Mac и Windows */
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    /* Убираем ядовитый розовый, делаем мягкий, чистый студийный фон */
+    background: #f4f5f7;
+    color: #1e293b; /* Глубокий графитовый цвет текста вместо жесткого черного */
+    line-height: 1.5; /* Комфортное расстояние между строками */
+    -webkit-font-smoothing: antialiased;
 }
 
-.dashboard{
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-    gap:15px;
-    padding:15px;
+.dashboard {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    padding: 24px;
+    max-width: 1200px;
+    margin: 0 auto; /* Центрируем дашборд на больших экранах */
 }
 
-.card{
-    background:white;
-    padding:15px;
-    border-radius:10px;
+.card {
+    background: white;
+    padding: 24px;
+    border-radius: 16px; /* Более мягкие, современные скругления */
+    /* Элегантная, едва заметная тень для объема */
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.chart-card{
-    grid-column:span 2;
+/* Эффект при наведении, чтобы интерактив красиво смотрелся на показе */
+.card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
 }
 
-#clock{
-    font-size:2rem;
-    font-weight:bold;
+/* ===== ТИПОГРАФИКА ДАШБОРДА ===== */
+
+h2 {
+    margin-top: 0;
+    margin-bottom: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: -0.02em; /* Легкое сжатие букв для премиального вида */
+    color: #64748b; /* Спокойный стальной цвет для заголовков карточек */
+    text-transform: uppercase; /* Делает заголовки аккуратными тегами */
 }
 
-ul{
-    padding-left:20px;
+/* Большие виджеты (Время, Погода, Валюта) */
+#clock, #weather, #currency {
+    font-size: 2.25rem; /* Делаем цифры крупными и заметными */
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    color: #0f172a; /* Максимально контрастный темный для главных данных */
 }
 
-@media(max-width:768px){
-    .chart-card{
-        grid-column:span 1;
+/* Специальный акцент для тикающих секунд, если они есть */
+#clock {
+    font-variant-numeric: tabular-nums; /* Чтобы цифры не прыгали при смене секунд */
+    background: linear-gradient(135deg, #3b82f6, #1d4ed8); /* Градиент для времени */
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* Стилизация списка новостей */
+ul {
+    margin: 0;
+    padding-left: 0;
+    list-style: none; /* Убираем стандартные уродливые точки */
+}
+
+li {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: #334155;
+    padding: 8px 0;
+    border-bottom: 1px solid #f1f5f9; /* Аккуратный разделитель между новостями */
+}
+
+li:last-child {
+    border-bottom: none; /* Убираем линию у последней новости */
+}
+
+/* График */
+.chart-card {
+    grid-column: span 2;
+}
+
+.chart-card h2 {
+    color: #3b82f6; /* Подсвечиваем заголовок графика синим */
+}
+
+/* Адаптивность */
+@media(max-width: 768px) {
+    .dashboard {
+        padding: 16px;
+        gap: 16px;
+    }
+    .card {
+        padding: 20px;
+    }
+    .chart-card {
+        grid-column: span 1;
+    }
+    #clock, #weather, #currency {
+        font-size: 1.85rem;
     }
 }
