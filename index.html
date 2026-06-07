@@ -6,42 +6,94 @@
 
     <title>Office Dashboard</title>
 
-    <link rel="stylesheet" href="style.css">
-
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
-<body>
 
-<div class="dashboard">
+<body class="min-h-screen bg-slate-950 text-white">
 
-    <div class="card">
-        <h2>Время</h2>
-        <div id="clock">--:--:--</div>
+<div class="p-6">
+
+    <div class="mb-8">
+        <h1 class="text-5xl font-bold">
+            Office Dashboard
+        </h1>
+
+        <p class="text-slate-400">
+            Live Data Center
+        </p>
     </div>
 
-    <div class="card">
-        <h2>Погода</h2>
-        <div id="weather">Загрузка...</div>
+    <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+
+        <!-- CLOCK -->
+        <div class="bg-slate-900 rounded-3xl p-6 shadow-xl border border-slate-800">
+            <h2 class="text-slate-400 mb-3">
+                🕒 Время
+            </h2>
+
+            <div
+                id="clock"
+                class="text-5xl font-bold">
+                --:--:--
+            </div>
+        </div>
+
+        <!-- WEATHER -->
+        <div class="bg-slate-900 rounded-3xl p-6 shadow-xl border border-slate-800">
+            <h2 class="text-slate-400 mb-3">
+                🌤 Погода
+            </h2>
+
+            <div
+                id="weather"
+                class="text-4xl font-semibold">
+                Загрузка...
+            </div>
+        </div>
+
+        <!-- CURRENCY -->
+        <div class="bg-slate-900 rounded-3xl p-6 shadow-xl border border-slate-800">
+            <h2 class="text-slate-400 mb-3">
+                💵 USD/KGS
+            </h2>
+
+            <div
+                id="currency"
+                class="text-4xl font-semibold text-green-400">
+                Загрузка...
+            </div>
+        </div>
+
+        <!-- NEWS -->
+        <div class="bg-slate-900 rounded-3xl p-6 shadow-xl border border-slate-800">
+            <h2 class="text-slate-400 mb-3">
+                📰 Новости
+            </h2>
+
+            <ul
+                id="news"
+                class="space-y-2 text-sm">
+            </ul>
+        </div>
+
     </div>
 
-    <div class="card">
-        <h2>USD/KGS</h2>
-        <div id="currency">Загрузка...</div>
-    </div>
+    <!-- CHART -->
+    <div
+        class="mt-6 bg-slate-900 rounded-3xl p-6 shadow-xl border border-slate-800">
 
-    <div class="card">
-        <h2>Новости</h2>
-        <ul id="news"></ul>
-    </div>
+        <h2 class="text-slate-400 mb-4 text-xl">
+            📈 Динамика курса USD
+        </h2>
 
-    <div class="card chart-card">
-        <h2>Курс USD</h2>
         <canvas id="currencyChart"></canvas>
+
     </div>
 
 </div>
 
-<script type="module" src="app.js"></script>
+<script type="module" src="./app.js"></script>
 
 </body>
 </html>
