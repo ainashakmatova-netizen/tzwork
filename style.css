@@ -105,3 +105,60 @@ li:last-child {
         font-size: 1.85rem;
     }
 }
+
+
+
+li {
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-main);
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-color);
+    transition: border-color 0.3s ease, color 0.3s ease;
+}
+
+li:last-child {
+    border-bottom: none;
+}
+
+
+/* ===== КАРТОЧКА С ГРАФИКОМ ===== */
+.chart-card {
+    grid-column: span 2;
+}
+
+.chart-card h2 {
+    color: #3b82f6; /* Акцент на графике */
+}
+
+
+/* ===== АДАПТИВНОСТЬ ===== */
+@media(max-width: 768px) {
+    body {
+        padding-top: 60px;
+    }
+    body::before {
+        height: 50px;
+        font-size: 0.95rem;
+        padding: 0 16px;
+    }
+    body::after {
+        top: 14px;
+        right: 16px;
+        font-size: 0.7rem;
+        padding: 2px 8px;
+    }
+    .dashboard {
+        padding: 16px;
+        gap: 16px;
+    }
+    .card {
+        padding: 20px;
+    }
+    .chart-card {
+        grid-column: span 1;
+    }
+    #clock, #weather, #currency {
+        font-size: 1.85rem;
+    }
+}
