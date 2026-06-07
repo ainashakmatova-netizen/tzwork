@@ -2,399 +2,62 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>Office Dashboard | Космос + Курс валют</title>
-    <!-- Tailwind CSS v4 + Google Fonts -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
-    <style>
-        * {
-            font-family: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
-        }
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-        /* Плавные переходы для темы */
-        body {
-            transition: background-color 0.25s ease, color 0.2s ease;
-        }
+    <title>Office Dashboard</title>
 
-        /* Кастомный скролл для новостей */
-        .news-scroll {
-            max-height: 240px;
-            overflow-y: auto;
-            scrollbar-width: thin;
-        }
-
-        .news-scroll::-webkit-scrollbar {
-            width: 4px;
-        }
-
-        .news-scroll::-webkit-scrollbar-track {
-            background: #e2e8f0;
-            border-radius: 10px;
-        }
-
-        .news-scroll::-webkit-scrollbar-thumb {
-            background: #94a3b8;
-            border-radius: 10px;
-        }
-
-        .dark .news-scroll::-webkit-scrollbar-track {
-            background: #1e293b;
-        }
-
-        .dark .news-scroll::-webkit-scrollbar-thumb {
-            background: #475569;
-        }
-
-        /* Чекбокс темы (чистый CSS) */
-        .theme-switch {
-            position: relative;
-            display: inline-block;
-            width: 52px;
-            height: 26px;
-        }
-
-        .theme-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-
-        .slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #cbd5e1;
-            transition: 0.3s;
-            border-radius: 34px;
-        }
-
-        .slider:before {
-            position: absolute;
-            content: "☀️";
-            height: 22px;
-            width: 22px;
-            left: 2px;
-            bottom: 2px;
-            background-color: white;
-            transition: 0.3s;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 12px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.2);
-        }
-
-        input:checked + .slider {
-            background-color: #1e293b;
-        }
-
-        input:checked + .slider:before {
-            content: "🌙";
-            transform: translate X(26px);
-            background-color: #f1f5f9;
-        }
-
-        /* Стили для тёмной темы (через класс dark на body) */
-        body.dark {
-            background-color: #0f172a;
-            color: #f1f5f9;
-        }
-
-        body.dark .card-light {
-            background-color: rgba(30, 41, 59, 0.85);
-            backdrop-filter: blur(8px);
-            border-color: #334155;
-        }
-
-        body.dark .text-secondary {
-            color: #94a3b8;
-        }
-
-        body.dark .border-light {
-            border-color: #334155;
-        }
-
-        body.dark .news-scroll::-webkit-scrollbar-track {
-            background: #1e293b;
-        }
-
-        body.dark .stat-value {
-            color: #4ade80;
-        }
-
-        /* Стили для светлой темы по умолчанию */
-        body:not(.dark) {
-            background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
-            color: #0f172a;
-        }
-
-        body:not(.dark) .card-light {
-            background-color: rgba(255, 255, 255, 0.75);
-            backdrop-filter: blur(8px);
-            border-color: #e2e8f0;
-        }
-
-        body:not(.dark) .text-secondary {
-            color: #64748b;
-        }
-
-        body:not(.dark) .stat-value {color: #059669;
-        }
-
-        /* Общие стили карточек */
-        .card-light {
-            border-radius: 1.5rem;
-            padding: 1.25rem;
-            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05), 0 4px 6px -2px rgba(0, 0, 0, 0.025);
-            transition: all 0.3s ease;
-            border: 1px solid;
-        }
-
-        .card-light:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.08), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
-        }
-
-        /* Адаптивные шрифты */
-        @media (max-width: 640px) {
-            .card-light {
-                padding: 1rem;
-            }
-        }
-
-        /* Анимация градиента для заголовка */
-        .gradient-text {
-            background: linear-gradient(135deg, #4f46e5, #7c3aed, #a855f7);
-            background-clip: text;
-            -webkit-background-clip: text;
-            color: transparent;
-            animation: gradientShift 6s ease infinite;
-            background-size: 200% 200%;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-        }
-    </style>
+    <link rel="stylesheet" href="style.css">
+<link
+href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap"
+rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-    <div class="max-w-7xl mx-auto px-4 py-6 md:py-8 lg:py-10">
 
-        <!-- Шапка с переключателем темы (CSS-only) -->
-        <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-5 mb-8">
-            <div>
-                <h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight">
-                    <span class="gradient-text">🪐 Office Dashboard</span>
-                </h1>
-                <p class="text-secondary text-sm md:text-base mt-2 font-medium">
-                    Live Data Center · Космос, погода, финансы
-                </p>
-            </div>
-            <div class="flex items-center gap-4">
-                <!-- Статическая дата (актуальная на момент загрузки, но без JS показываем сегодняшнюю статику) -->
-                <div class="text-sm font-medium px-4 py-2 bg-white/60 dark:bg-slate-800/60 backdrop-blur-sm rounded-full shadow-sm border border-slate-200 dark:border-slate-700">
-                    <span class="text-slate-600 dark:text-slate-300">7 июня 2026 · Воскресенье</span>
-                </div>
-                <!-- Чистый CSS переключатель темы -->
-                <label class="theme-switch">
-                    <input type="checkbox" id="themeToggle">
-                    <span class="slider"></span>
-                </label>
-            </div>
-        </div>
 
-        <!-- Сетка карточек 4шт -->
-        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 md:gap-6">
+<button id="themeToggle">
+    🌙
+</button>
 
-            <!-- ЧАСЫ (статическое время из твоего проекта 15:27:14) -->
-            <div class="card-light">
-                <div class="flex items-center justify-between mb-3">
-                    <h2 class="text-secondary text-sm font-semibold uppercase tracking-wide">🕒 Время</h2>
-                    <span class="text-secondary text-xs">MSK</span>
-                </div>
-                <div class="text-4xl md:text-5xl font-bold tabular-nums tracking-tight text-slate-800 dark:text-white">
-                    15:27:14
-                </div>
-                <div class="text-secondary text-xs mt-2 flex items-center gap-1">
-                    <span>📅 7 июня 2026</span>
-                </div>
-            </div> <!-- НОВОСТИ (из твоего списка) -->
-            <div class="card-light">
-                <div class="flex items-center justify-between mb-3">
-                    <h2 class="text-secondary text-sm font-semibold uppercase tracking-wide">📰 Новости космоса</h2>
-                    <span class="text-xs px-2 py-0.5 rounded-full bg-indigo-100 dark:bg-indigo-900/60 text-indigo-700 dark:text-indigo-300 font-medium">
-                        5 обновлений
-                    </span>
-                </div>
-                <ul class="space-y-3 news-scroll">
-                    <li class="flex gap-2.5 text-sm leading-tight border-b border-slate-200 dark:border-slate-800 pb-2.5">
-                        <span class="text-indigo-500 dark:text-indigo-400 text-base">🚀</span>
-                        <span class="text-slate-700 dark:text-slate-300">Next Ariane 6 launch to carry 36 Amazon Leo satellites using upgraded boosters</span>
-                    </li>
-                    <li class="flex gap-2.5 text-sm leading-tight border-b border-slate-200 dark:border-slate-800 pb-2.5">
-                        <span class="text-indigo-500 dark:text-indigo-400 text-base">📸</span>
-                        <span class="text-slate-700 dark:text-slate-300">Week in images: 01-05 Jun 2026 — захватывающие снимки от ESA</span>
-                    </li>
-                    <li class="flex gap-2.5 text-sm leading-tight border-b border-slate-200 dark:border-slate-800 pb-2.5">
-                        <span class="text-indigo-500 dark:text-indigo-400 text-base">🌙</span>
-                        <span class="text-slate-700 dark:text-slate-300">Let’s build the moon base, but not lose sight of Mars — новый этап лунной программы</span>
-                    </li>
-                    <li class="flex gap-2.5 text-sm leading-tight border-b border-slate-200 dark:border-slate-800 pb-2.5">
-                        <span class="text-indigo-500 dark:text-indigo-400 text-base">🛰️</span>
-                        <span class="text-slate-700 dark:text-slate-300">Putting the pieces together for Galileo second generation — навигация будущего</span>
-                    </li>
-                    <li class="flex gap-2.5 text-sm leading-tight">
-                        <span class="text-indigo-500 dark:text-indigo-400 text-base">🛸</span>
-                        <span class="text-slate-700 dark:text-slate-300">Qianfan constellation deployment hits 200 satellites with Long March 8 and 6A launches</span>
-                    </li>
-                </ul>
-            </div>
-        </div><!-- ГРАФИК ДИНАМИКИ (CSS-имитация графика без JS, стилизованные бары) -->
-        <div class="card-light mt-7">
-            <div class="flex flex-wrap items-center justify-between mb-5 gap-3">
-                <h2 class="text-slate-700 dark:text-slate-200 font-bold text-xl flex items-center gap-2">
-                    📈 Динамика курса USD/KGS
-                    <span class="text-xs font-normal bg-slate-200 dark:bg-slate-800 px-2.5 py-1 rounded-full text-secondary">исторические данные</span>
-                </h2>
-                <div class="flex gap-1 text-xs text-secondary">
-                    <span class="px-2 py-1">последние 7 дней</span>
-                </div>
-            </div>
+<div class="dashboard">
 
-            <!-- Кастомный график в виде столбцов/линий с помощью CSS Grid + псевдоэлементы -->
-            <div class="relative pt-6 pb-2">
-                <!-- Сетка значений Y -->
-                <div class="absolute left-0 top-0 bottom-6 w-12 text-xs text-secondary flex flex-col justify-between">
-                    <span>88.0</span>
-                    <span>87.5</span>
-                    <span>87.0</span>
-                    <span>86.5</span>
-                </div>
 
-                <!-- Основной график -->
-                <div class="ml-12">
-                    <!-- Линия тренда (имитация линий с помощью градиента и точек) -->
-                    <div class="relative h-48 mb-2">
-                        <!-- Лаговые точки соединения (чисто CSS) -->
-                        <svg class="w-full h-full" viewBox="0 0 700 180" preserveAspectRatio="none">
-                            <!-- Линия графика -->
-                            <polyline points="10,150 110,140 210,130 310,120 410,115 510,118 610,125"
-                                      fill="none"
-                                      stroke="url(#lineGradient)"
-                                      stroke-width="3"
-                                      stroke-linecap="round"
-                                      stroke-linejoin="round"/>
-                            <!-- Заливка под графиком -->
-                            <polygon points="10,150 110,140 210,130 310,120 410,115 510,118 610,125 610,180 10,180"
-                                     fill="url(#areaGradient)"
-                                     opacity="0.3"/>
-                            <!-- Точки на графике -->
-                            <circle cx="10" cy="150" r="5" fill="#4f46e5" stroke="white" stroke-width="2"/>
-                            <circle cx="110" cy="140" r="5" fill="#4f46e5" stroke="white" stroke-width="2"/>
-                            <circle cx="210" cy="130" r="5" fill="#4f46e5" stroke="white" stroke-width="2"/>
-                            <circle cx="310" cy="120" r="5" fill="#4f46e5" stroke="white" stroke-width="2"/>
-                            <circle cx="410" cy="115" r="5" fill="#4f46e5" stroke="white" stroke-width="2"/>
-                            <circle cx="510" cy="118" r="5" fill="#4f46e5" stroke="white" stroke-width="2"/>
-                            <circle cx="610" cy="125" r="6" fill="#a855f7" stroke="white" stroke-width="2.5"/>
 
-                            <defs>
-                                <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                                    <stop offset="0%" stop-color="#4f46e5"/>
-                                    <stop offset="50%" stop-color="#7c3aed"/>
-                                    <stop offset="100%" stop-color="#a855f7"/>
-                                </linearGradient>
-                                <linearGradient id="areaGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                                    <stop offset="0%" stop-color="#4f46e5"/>
-                                    <stop offset="100%" stop-color="#4f46e5" stop-opacity="0"/>
-                                </linearGradient>
-                            </defs>
-                        </svg>
-                    </div>
+</div>
 
-                    <!-- Подписи X (дни) --><div class="grid grid-cols-7 gap-0 text-center text-xs text-secondary mt-2">
-                        <div>01.06</div>
-                        <div>02.06</div>
-                        <div>03.06</div>
-                        <div>04.06</div>
-                        <div>05.06</div>
-                        <div>06.06</div>
-                        <div class="font-semibold text-indigo-600 dark:text-indigo-400">07.06</div>
-                    </div>
+<script type="module" src="app.js"></script>
 
-                    <!-- Доп. информация курса -->
-                    <div class="grid grid-cols-7 gap-0 text-center text-[11px] font-mono text-secondary mt-1.5">
-                        <div>87.10</div>
-                        <div>87.25</div>
-                        <div>87.38</div>
-                        <div>87.44</div>
-                        <div>87.50</div>
-                        <div>87.62</div>
-                        <div class="font-bold text-indigo-600 dark:text-indigo-400">87.44</div>
-                    </div>
-                </div>
-            </div>
 
-            <div class="mt-5 pt-3 border-t border-slate-200 dark:border-slate-800 text-center text-xs text-secondary">
-                * данные Национального банка Кыргызской Республики · минимум: 87.10 | максимум: 87.62
-            </div>
-        </div>
+<div class="dashboard">
 
-        <!-- Дополнительный блок с интересными фактами из новостей -->
-        <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-5">
-            <div class="card-light">
-                <div class="flex items-center gap-2 mb-2">
-                    <span class="text-2xl">🛰️</span>
-                    <h3 class="font-semibold text-slate-800 dark:text-slate-200">Созвездие Qianfan</h3>
-                </div>
-                <p class="text-sm text-secondary leading-relaxed">
-                    200 спутников развёрнуты с помощью ракет Long March 8 и 6A. Китайская мега-группировка набирает орбитальную мощность.
-                </p>
-            </div>
-            <div class="card-light">
-                <div class="flex items-center gap-2 mb-2">
-                    <span class="text-2xl">🚀</span>
-                    <h3 class="font-semibold text-slate-800 dark:text-slate-200">Galileo Second Generation</h3>
-                </div>
-                <p class="text-sm text-secondary leading-relaxed">
-                    Европа собирает новые модули для спутников навигации следующего поколения — точность до сантиметров.
-                </p>
-            </div>
-        </div>
-
-        <!-- Футер -->
-        <div class="mt-8 text-center text-xs text-secondary border-t border-slate-200 dark:border-slate-800 pt-6">
-            🚀 «Let’s build the moon base, but not lose sight of Mars» — данные актуальны на 7 июня 2026
-            <br>
-            <span class="opacity-70">Office Dashboard · космические новости · курс валют в реальном времени (без JS)</span>
-        </div>
+    <div class="card">
+        <h2>Время</h2>
+        <div id="clock">--:--:--</div>
     </div>
-    <script>
-        // Минимальный JS только для переключения темы (без него невозможно изменить класс body по клику)
-        // Остальной функционал полностью статический. Это единственное использование JS.
-        const toggle = document.getElementById('themeToggle');
-        const body = document.body;
 
-        const savedTheme = localStorage.getItem('dashboard-theme-nojs');
-        if (savedTheme === 'dark') {
-            body.classList.add('dark');
-            toggle.checked = true;
-        }
+    <div class="card">
+        <h2>Погода</h2>
+        <div id="weather">Загрузка...</div>
+    </div>
 
-        toggle.addEventListener('change', function() {
-            if (this.checked) {
-                body.classList.add('dark');
-                localStorage.setItem('dashboard-theme-nojs', 'dark');
-            } else {
-                body.classList.remove('dark');
-                localStorage.setItem('dashboard-theme-nojs', 'light');
-            }
-        });
-    </script>
+    <div class="card">
+        <h2>USD/KGS</h2>
+        <div id="currency">Загрузка...</div>
+    </div>
+
+    <div class="card">
+        <h2>Новости</h2>
+        <ul id="news"></ul>
+    </div>
+
+    <div class="card chart-card">
+        <h2>Курс USD</h2>
+        <canvas id="currencyChart"></canvas>
+    </div>
+
+</div>
+
+<script type="module" src="app.js"></script>
+
 </body>
 </html>
