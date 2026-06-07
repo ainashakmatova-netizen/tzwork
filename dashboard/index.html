@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Office Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div class="dashboard">
+
+    <div class="card">
+        <h2>Время</h2>
+        <div id="clock">--:--:--</div>
+    </div>
+
+    <div class="card">
+        <h2>Погода</h2>
+        <div id="weather">Загрузка...</div>
+    </div>
+
+    <div class="card">
+        <h2>USD/KGS</h2>
+        <div id="currency">Загрузка...</div>
+    </div>
+
+    <div class="card">
+        <h2>Новости</h2>
+        <ul id="news"></ul>
+    </div>
+
+    <div class="card chart-card">
+        <h2>Курс USD</h2>
+        <canvas id="currencyChart"></canvas>
+    </div>
+
+</div>
+
+<script type="module" src="app.js"></script>
+
+</body>
+</html>

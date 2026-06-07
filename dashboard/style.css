@@ -1,0 +1,37 @@
+body{
+    margin:0;
+    font-family:Arial,sans-serif;
+    background:#f5f5f5;
+}
+
+.dashboard{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:15px;
+    padding:15px;
+}
+
+.card{
+    background:white;
+    padding:15px;
+    border-radius:10px;
+}
+
+.chart-card{
+    grid-column:span 2;
+}
+
+#clock{
+    font-size:2rem;
+    font-weight:bold;
+}
+
+ul{
+    padding-left:20px;
+}
+
+@media(max-width:768px){
+    .chart-card{
+        grid-column:span 1;
+    }
+}
